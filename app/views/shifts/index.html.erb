@@ -1,3 +1,3 @@
 <% if user_signed_in? %>
-    <div> シフトを作成する </div>
+    <%= link_to "シフトを作成する", new_shift_path, class: "shift-create" %>
 <% end %>
