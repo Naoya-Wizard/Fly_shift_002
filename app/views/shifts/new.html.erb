@@ -1,22 +1,24 @@
-<%= form_with model:@shift, url: "#", local: false do |f| %>
+<%= form_with model:@shift, url: shifts_path, local: true do |f| %>
 <div id="speak_month">何月のシフトを作成しますか?</div>
 <div><%= f.collection_select(:month_id, Month.all, :id, :name, {prompt: "選択してください"}, {class:"select-box", id:"month-category"}) %></div>
 <div id="speak_shift"> </div>
 <div id="shift_list"></div>
 <div id="calender"></div>
+<div><%= f.text_field :shift, id: "all-shift" %></div>
 
 
 
 <script>
 var ShiftList = ""
-document.getElementById("list_input").value
 function buttonClick(){
+event.preventDefault();
      document.getElementById("shift_list").insertAdjacentHTML('beforeEnd', `<div>${document.getElementById("list_input").value}</div>`);
      ShiftList += `<option>${document.getElementById("list_input").value}</option>`
      document.getElementById("list_input").value = ""
-     console.log(ShiftList);
 }
+
 function calender(){
+        event.preventDefault();
         insert = document.getElementById("calender")
         HTMLstr = ""
         myDate    = new Date(2021, document.getElementById("month-category").value-1,1);                                    
@@ -70,7 +72,6 @@ function calender(){
         }
         HTMLstr += "</table>";    
         insert.insertAdjacentHTML('beforeEnd', HTMLstr);
-        console.log(HTMLstr);
         document.getElementById("list_input").style.display ="none";
         document.getElementById("button").style.display ="none";
         document.getElementById("add_button").style.display ="none";
@@ -78,7 +79,19 @@ function calender(){
         document.getElementById("month-category").style.display ="none";
         document.getElementById("shift_list").style.display ="none";
         document.getElementById("speak_shift").textContent = `カレンダーにシフトを入力してください！`;
-}
+        document.getElementById("speak_shift").insertAdjacentHTML('beforeEnd', ` <%= f.submit '終了' , id: "send_button" %>`);
+        var allform = document.getElementById("send_button")
+        all_shift_array = []
+        allform.onclick = function (){
+        for(i=0; i<31; i++){
+            if  (document.getElementById(`shift-${i+1}`) == null)
+                return
+            else
+                all_shift_array.push(document.getElementById(`shift-${i+1}`).value)
+        }
+        document.getElementById("all-shift").value = all_shift_array;
+        };
+};
 </script>
 
 

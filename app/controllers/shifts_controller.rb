@@ -7,4 +7,8 @@ class ShiftsController < ApplicationController
     def new
         @shift = Shift.new
     end
+
+    def create
+        binding.pry
+    end
 end
