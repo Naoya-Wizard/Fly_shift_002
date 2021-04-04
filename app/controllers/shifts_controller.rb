@@ -23,6 +23,10 @@ class ShiftsController < ApplicationController
         redirect_to root_path
     end
 
+    def show
+        @shift = Shift.find(params[:id])
+    end
+
     private
     def shift_params
         params.require(:shift).permit(:month_id, :year_id, :shift).merge(user_id: current_user.id)
