@@ -14,5 +14,5 @@ class Month < ActiveHash::Base
         { id: 12, name: '12月' }
     ]
     include ActiveHash::Associations
-    has_many :shift
+    has_many :shifts
 end
