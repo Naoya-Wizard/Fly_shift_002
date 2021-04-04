@@ -1,6 +1,9 @@
 <%= form_with model:@shift, url: shifts_path, local: true do |f| %>
-<div id="speak_month">何月のシフトを作成しますか?</div>
-<div><%= f.collection_select(:month_id, Month.all, :id, :name, {prompt: "選択してください"}, {class:"select-box", id:"month-category"}) %></div>
+<div id="speak_month">何年何月のシフトを作成しますか?</div>
+<div>
+    <%= f.collection_select(:year_id, Year.all, :id, :name, {}, {class:"select-box", id:"year-category"}) %>
+    <%= f.collection_select(:month_id, Month.all, :id, :name, {prompt: "選択してください"}, {class:"select-box", id:"month-category"}) %>
+</div>
 <div id="speak_shift"> </div>
 <div id="shift_list"></div>
 <div id="calender"></div>
@@ -21,7 +24,7 @@ function calender(){
         event.preventDefault();
         insert = document.getElementById("calender")
         HTMLstr = ""
-        myDate    = new Date(2021, document.getElementById("month-category").value-1,1);                                    
+        myDate    = new Date(document.getElementById("year-category").value, document.getElementById("month-category").value-1,1);                                    
         myWeekTbl = new Array("日","月","火","水","木","金","土");  
         myMonthTbl= new Array(31,28,31,30,31,30,31,31,30,31,30,31);
         myYear = myDate.getFullYear();                                
@@ -85,7 +88,7 @@ function calender(){
         allform.onclick = function (){
         for(i=0; i<31; i++){
             if  (document.getElementById(`shift-${i+1}`) == null)
-                return
+                break;
             else
                 all_shift_array.push(document.getElementById(`shift-${i+1}`).value)
         }
