@@ -1,7 +1,7 @@
 class ShiftsController < ApplicationController
 
     def index
-
+        @shifts = Shift.includes(:user).order("created_at DESC")
     end
 
     def new
@@ -13,7 +13,7 @@ class ShiftsController < ApplicationController
         if @shift.save
             redirect_to root_path
         else
-        render :new
+            render :new
         end
     end
     private
