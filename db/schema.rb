@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2021_04_03_090057) do
   create_table "shifts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "shift"
     t.integer "month_id"
+    t.integer "year_id"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -35,5 +36,4 @@ ActiveRecord::Schema.define(version: 2021_04_03_090057) do
   end
 
   add_foreign_key "shifts", "users"
-
 end

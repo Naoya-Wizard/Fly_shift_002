@@ -5,7 +5,7 @@
             <div class="border"></div>
             <% array = shift.shift.split(",").uniq! %>
             <div><%= "作成日: #{shift.updated_at}"%></div>
-            <div><%= "シフト月: #{shift.month.name}"%></div>
+            <div><%= "シフト月: #{shift.year.name}#{shift.month.name}"%></div>
             <div><%= "リスト: #{array.join(', ')}" %></div>
         <% end %>
     <% end %>
