@@ -7,6 +7,7 @@
             <div><%= "作成日: #{shift.updated_at}"%></div>
             <div><%= "シフト月: #{shift.year.name}#{shift.month.name}"%></div>
             <div><%= "リスト: #{array.join(', ')}" %></div>
+            <%= link_to "削除", shift_path(shift), method: :delete, class:"shift-destroy" %>
         <% end %>
     <% end %>
 <% end %>
