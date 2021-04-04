@@ -8,12 +8,13 @@
 
 
 <script>
-var ShiftList 
+var ShiftList = ""
 document.getElementById("list_input").value
 function buttonClick(){
      document.getElementById("shift_list").insertAdjacentHTML('beforeEnd', `<div>${document.getElementById("list_input").value}</div>`);
-     ShiftList =+ document.getElementById("list_input").value
+     ShiftList += `<option>${document.getElementById("list_input").value}</option>`
      document.getElementById("list_input").value = ""
+     console.log(ShiftList);
 }
 function calender(){
         insert = document.getElementById("calender")
@@ -54,13 +55,16 @@ function calender(){
             HTMLstr += "<tr>";                                
             for(j=0; j<7; j++){                                     
                 HTMLstr += "<td align='center' ";              
-                myDat = myTable[j+(i*7)];                            
+                myDat = myTable[j+(i*7)];    
                 if (myDat==myToday)HTMLstr += "bgcolor='#00ffff'>" 
                 else if(j==0)      HTMLstr += "bgcolor='#ffb6c1'>" 
-                else     
-                HTMLstr += "bgcolor='#ffffe0'>" 
-                HTMLstr += `<strong>${myDat}</strong><div><select><option>test</option></select></div>`; 
-                HTMLstr += "</td>";                             
+                                
+                else HTMLstr += "bgcolor='#ffffe0'>" 
+                
+                if (myDat==" "){
+                HTMLstr += `<strong>${myDat}</strong>`; 
+                }else{HTMLstr += `<strong>${myDat}</strong><div><select id="shift-${myDat}">${ShiftList}</select></div>`; }
+                HTMLstr += "</td>";    
             }
             HTMLstr += "</tr>";                                
         }
@@ -74,7 +78,6 @@ function calender(){
         document.getElementById("month-category").style.display ="none";
         document.getElementById("shift_list").style.display ="none";
         document.getElementById("speak_shift").textContent = `カレンダーにシフトを入力してください！`;
-
 }
 </script>
 
