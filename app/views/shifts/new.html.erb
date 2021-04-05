@@ -68,7 +68,7 @@ function calender(){
                 
                 if (myDat==" "){
                 HTMLstr += `<strong>${myDat}</strong>`; 
-                }else{HTMLstr += `<strong>${myDat}</strong><div><select id="shift-${myDat}">${ShiftList}</select></div>`; }
+                }else{HTMLstr += `<strong>${myDat}</strong><div><select id="shift-${myDat}">${ShiftList}<option> </option></select></div>`; }
                 HTMLstr += "</td>";    
             }
             HTMLstr += "</tr>";                                

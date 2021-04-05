@@ -27,6 +27,15 @@ class ShiftsController < ApplicationController
         @shift = Shift.find(params[:id])
     end
 
+    def update
+        @shift = Shift.find(params[:id])
+        if @shift.update(shift_params)
+            redirect_to root_path
+        else
+            render :show
+        end
+    end
+
     private
     def shift_params
         params.require(:shift).permit(:month_id, :year_id, :shift).merge(user_id: current_user.id)

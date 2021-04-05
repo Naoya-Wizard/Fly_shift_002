@@ -1,7 +1,7 @@
 <%= form_with model: @shift, local: true do |f| %>
 
 <% array = @shift.shift.split(",") %>
-<div ><%= f.text_field :shift, id: "all-shift" %></div>
+<div hidden><%= f.text_field :shift, id: "all-shift" %></div>
 <div hidden id="shift-1"><%= array[0] %></div>
 <div hidden id="shift-2"><%= array[1] %></div>
 <div hidden id="shift-3"><%= array[2] %></div>
