@@ -1,30 +1,54 @@
-<%= form_with model:@shift, url: shifts_path, local: true do |f| %>
-<div id="speak_month">何年何月のシフトを作成しますか?</div>
-<div>
-    <%= f.collection_select(:year_id, Year.all, :id, :name, {}, {class:"select-box", id:"year-category"}) %>
-    <%= f.collection_select(:month_id, Month.all, :id, :name, {prompt: "選択してください"}, {class:"select-box", id:"month-category"}) %>
-</div>
-<div id="speak_shift"> </div>
-<div id="shift_list"></div>
-<div id="calender"></div>
+<%= form_with model: @shift, local: true do |f| %>
+
+<% array = @shift.shift.split(",") %>
 <div hidden><%= f.text_field :shift, id: "all-shift" %></div>
+<div hidden id="shift-1"><%= array[0] %></div>
+<div hidden id="shift-2"><%= array[1] %></div>
+<div hidden id="shift-3"><%= array[2] %></div>
+<div hidden id="shift-4"><%= array[3] %></div>
+<div hidden id="shift-5"><%= array[4] %></div>
+<div hidden id="shift-6"><%= array[5] %></div>
+<div hidden id="shift-7"><%= array[6] %></div>
+<div hidden id="shift-8"><%= array[7] %></div>
+<div hidden id="shift-9"><%= array[8] %></div>
+<div hidden id="shift-10"><%= array[9] %></div>
+<div hidden id="shift-11"><%= array[10] %></div>
+<div hidden id="shift-12"><%= array[11] %></div>
+<div hidden id="shift-13"><%= array[12] %></div>
+<div hidden id="shift-14"><%= array[13] %></div>
+<div hidden id="shift-15"><%= array[14] %></div>
+<div hidden id="shift-16"><%= array[15] %></div>
+<div hidden id="shift-17"><%= array[16] %></div>
+<div hidden id="shift-18"><%= array[17] %></div>
+<div hidden id="shift-19"><%= array[18] %></div>
+<div hidden id="shift-20"><%= array[19] %></div>
+<div hidden id="shift-21"><%= array[20] %></div>
+<div hidden id="shift-22"><%= array[21] %></div>
+<div hidden id="shift-23"><%= array[22] %></div>
+<div hidden id="shift-24"><%= array[23] %></div>
+<div hidden id="shift-25"><%= array[24] %></div>
+<div hidden id="shift-26"><%= array[25] %></div>
+<div hidden id="shift-27"><%= array[26] %></div>
+<div hidden id="shift-28"><%= array[27] %></div>
+<div hidden id="shift-29"><%= array[28] %></div>
+<div hidden id="shift-30"><%= array[29] %></div>
+<div hidden id="shift-31"><%= array[30] %></div>
+
+<div hidden id="year-category"><%= @shift.year_id %></div>
+<div hidden id="month-category"><%= @shift.month_id %></div>
+<div id="calender"></div>
+<%= f.submit '更新' , id: "send_button" %>
 
 
 
 <script>
-var ShiftList = ""
-function buttonClick(){
-event.preventDefault();
-     document.getElementById("shift_list").insertAdjacentHTML('beforeEnd', `<div>${document.getElementById("list_input").value}</div>`);
-     ShiftList += `<option>${document.getElementById("list_input").value}</option>`
-     document.getElementById("list_input").value = ""
-}
+window.addEventListener("load",calender());
 
 function calender(){
-        event.preventDefault();
+        
         insert = document.getElementById("calender")
         HTMLstr = ""
-        myDate    = new Date(document.getElementById("year-category").value, document.getElementById("month-category").value-1,1);                                    
+        myDate    = new Date(document.getElementById("year-category").textContent, document.getElementById("month-category").textContent-1,1);                                    
         myWeekTbl = new Array("日","月","火","水","木","金","土");  
         myMonthTbl= new Array(31,28,31,30,31,30,31,31,30,31,30,31);
         myYear = myDate.getFullYear();                                
@@ -41,9 +65,9 @@ function calender(){
         for(i=0; i<7*myTblLine; i++) myTable[i]=" ";              
         for(i=0; i<myMonthTbl[myMonth]; i++)myTable[i+myWeek]=i+1;
      
-        HTMLstr += `<table border='1' width='500' height='400'>`   
+        HTMLstr += `<table border='1' width='600' height='400'>`   
         HTMLstr += `<tr><td colspan='7' bgcolor='#7fffd4'>`  
-        HTMLstr += `<strong>${myYear}年${myMonth+1}月カレンダー</strong>`
+        HTMLstr += `<strong>${myYear}年${myMonth+1}月のシフト</strong>`
         HTMLstr += `</td></tr>`
         HTMLstr += `<tr>`;  
     
@@ -55,7 +79,7 @@ function calender(){
                     HTMLstr += "</td>";
         }
         HTMLstr += "</tr>";
-    
+        var num = 1
         for(i=0; i<myTblLine; i++){                                
             HTMLstr += "<tr>";                                
             for(j=0; j<7; j++){                                     
@@ -68,29 +92,25 @@ function calender(){
                 
                 if (myDat==" "){
                 HTMLstr += `<strong>${myDat}</strong>`; 
-                }else{HTMLstr += `<strong>${myDat}</strong><div><select id="shift-${myDat}">${ShiftList}<option> </option></select></div>`; }
+                }else{
+                    var shift = document.getElementById(`shift-${num}`).textContent
+                    HTMLstr += `<strong>${myDat}</strong><div ><input type="text" size="9" id="shiftedit-${myDat}" value="${shift}"></div>`; 
+                    num++
+                    }
                 HTMLstr += "</td>";    
             }
             HTMLstr += "</tr>";                                
         }
         HTMLstr += "</table>";    
         insert.insertAdjacentHTML('beforeEnd', HTMLstr);
-        document.getElementById("list_input").style.display ="none";
-        document.getElementById("button").style.display ="none";
-        document.getElementById("add_button").style.display ="none";
-        document.getElementById("speak_month").style.display ="none";
-        document.getElementById("month-category").style.display ="none";
-        document.getElementById("shift_list").style.display ="none";
-        document.getElementById("speak_shift").textContent = `カレンダーにシフトを入力してください！`;
-        document.getElementById("speak_shift").insertAdjacentHTML('beforeEnd', ` <%= f.submit '終了' , id: "send_button" %>`);
         var allform = document.getElementById("send_button")
         all_shift_array = []
         allform.onclick = function (){
         for(i=0; i<31; i++){
-            if  (document.getElementById(`shift-${i+1}`) == null)
+            if  (document.getElementById(`shiftedit-${i+1}`) == null)
                 break;
             else
-                all_shift_array.push(document.getElementById(`shift-${i+1}`).value)
+                all_shift_array.push(document.getElementById(`shiftedit-${i+1}`).value)
         }
         document.getElementById("all-shift").value = all_shift_array;
         allform.submit();
@@ -98,7 +118,4 @@ function calender(){
 };
 </script>
 
-
-
 <% end %>
-
