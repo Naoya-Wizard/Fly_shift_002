@@ -1,10 +1,121 @@
+<%= form_with model: @shift, local: true do |f| %>
+
+<% array = @shift.shift.split(",") %>
+<div ><%= f.text_field :shift, id: "all-shift" %></div>
+<div hidden id="shift-1"><%= array[0] %></div>
+<div hidden id="shift-2"><%= array[1] %></div>
+<div hidden id="shift-3"><%= array[2] %></div>
+<div hidden id="shift-4"><%= array[3] %></div>
+<div hidden id="shift-5"><%= array[4] %></div>
+<div hidden id="shift-6"><%= array[5] %></div>
+<div hidden id="shift-7"><%= array[6] %></div>
+<div hidden id="shift-8"><%= array[7] %></div>
+<div hidden id="shift-9"><%= array[8] %></div>
+<div hidden id="shift-10"><%= array[9] %></div>
+<div hidden id="shift-11"><%= array[10] %></div>
+<div hidden id="shift-12"><%= array[11] %></div>
+<div hidden id="shift-13"><%= array[12] %></div>
+<div hidden id="shift-14"><%= array[13] %></div>
+<div hidden id="shift-15"><%= array[14] %></div>
+<div hidden id="shift-16"><%= array[15] %></div>
+<div hidden id="shift-17"><%= array[16] %></div>
+<div hidden id="shift-18"><%= array[17] %></div>
+<div hidden id="shift-19"><%= array[18] %></div>
+<div hidden id="shift-20"><%= array[19] %></div>
+<div hidden id="shift-21"><%= array[20] %></div>
+<div hidden id="shift-22"><%= array[21] %></div>
+<div hidden id="shift-23"><%= array[22] %></div>
+<div hidden id="shift-24"><%= array[23] %></div>
+<div hidden id="shift-25"><%= array[24] %></div>
+<div hidden id="shift-26"><%= array[25] %></div>
+<div hidden id="shift-27"><%= array[26] %></div>
+<div hidden id="shift-28"><%= array[27] %></div>
+<div hidden id="shift-29"><%= array[28] %></div>
+<div hidden id="shift-30"><%= array[29] %></div>
+<div hidden id="shift-31"><%= array[30] %></div>
+
+<div hidden id="year-category"><%= @shift.year_id %></div>
+<div hidden id="month-category"><%= @shift.month_id %></div>
+<div id="calender"></div>
+<%= f.submit '更新' , id: "send_button" %>
 
 
 
-<%= array = @shift.shift.split(",") %>
+<script>
+window.addEventListener("load",calender());
 
-<div class="calender"></div>
+function calender(){
+        
+        insert = document.getElementById("calender")
+        HTMLstr = ""
+        myDate    = new Date(document.getElementById("year-category").textContent, document.getElementById("month-category").textContent-1,1);                                    
+        myWeekTbl = new Array("日","月","火","水","木","金","土");  
+        myMonthTbl= new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+        myYear = myDate.getFullYear();                                
+        if (((myYear%4)==0 && (myYear%100)!=0) || (myYear%400)==0){
+            myMonthTbl[1] = 29;                                     
+        }
+        myMonth = myDate.getMonth();                               
+        myToday = myDate.getDate();                                
+        myDate.setDate(1);                                        
+        myWeek = myDate.getDay();                                  
+        myTblLine = Math.ceil((myWeek+myMonthTbl[myMonth])/7);    
+        myTable   = new Array(7*myTblLine);                        
+    
+        for(i=0; i<7*myTblLine; i++) myTable[i]=" ";              
+        for(i=0; i<myMonthTbl[myMonth]; i++)myTable[i+myWeek]=i+1;
+     
+        HTMLstr += `<table border='1' width='600' height='400'>`   
+        HTMLstr += `<tr><td colspan='7' bgcolor='#7fffd4'>`  
+        HTMLstr += `<strong>${myYear}年${myMonth+1}月のシフト</strong>`
+        HTMLstr += `</td></tr>`
+        HTMLstr += `<tr>`;  
+    
+        for(i=0; i<7; i++){                                       
+            HTMLstr += `<td align='center'` 
+            if(i==0)HTMLstr += "bgcolor='#fa8072'>";           
+            else    HTMLstr += "bgcolor='#ffebcd'>";           
+                    HTMLstr += `<strong>${myWeekTbl[i]}</strong>`;  
+                    HTMLstr += "</td>";
+        }
+        HTMLstr += "</tr>";
+        var num = 1
+        for(i=0; i<myTblLine; i++){                                
+            HTMLstr += "<tr>";                                
+            for(j=0; j<7; j++){                                     
+                HTMLstr += "<td align='center' ";              
+                myDat = myTable[j+(i*7)];    
+                if (myDat==myToday)HTMLstr += "bgcolor='#00ffff'>" 
+                else if(j==0)      HTMLstr += "bgcolor='#ffb6c1'>" 
+                                
+                else HTMLstr += "bgcolor='#ffffe0'>" 
+                
+                if (myDat==" "){
+                HTMLstr += `<strong>${myDat}</strong>`; 
+                }else{
+                    var shift = document.getElementById(`shift-${num}`).textContent
+                    HTMLstr += `<strong>${myDat}</strong><div ><input type="text" size="9" id="shiftedit-${myDat}" value="${shift}"></div>`; 
+                    num++
+                    }
+                HTMLstr += "</td>";    
+            }
+            HTMLstr += "</tr>";                                
+        }
+        HTMLstr += "</table>";    
+        insert.insertAdjacentHTML('beforeEnd', HTMLstr);
+        var allform = document.getElementById("send_button")
+        all_shift_array = []
+        allform.onclick = function (){
+        for(i=0; i<31; i++){
+            if  (document.getElementById(`shiftedit-${i+1}`) == null)
+                break;
+            else
+                all_shift_array.push(document.getElementById(`shiftedit-${i+1}`).value)
+        }
+        document.getElementById("all-shift").value = all_shift_array;
+        allform.submit();
+        };
+};
+</script>
 
-
-
-
+<% end %>
