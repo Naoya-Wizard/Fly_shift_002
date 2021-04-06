@@ -5,4 +5,3 @@ select.onchange = function(){
     document.getElementById("shift_list").insertAdjacentHTML('beforeEnd', ` <button class="button" id="button" onclick="calender()">終了</button>`);
 };
 
-window.addEventListener("load", console.log("hello"));
