@@ -1,1 +1,49 @@
-<div>listindexです</div>
+<%= form_with model:@list, url: lists_path, local: true do |f| %>
+<%= f.text_field :listname, id: "list_name_rails" %>
+<%= f.text_field :shift, id: "shift_name_rails" %>
+
+<div>シフト作成に使うリストをあらかじめ作ることができます</div>
+<% @lists.each do | lists | %>
+    <% if current_user.id == lists.user.id %>
+        <%= lists.listname %>
+        <%= lists.shift %>
+    <% end %>
+<% end %>
+
+<div id="list_speak">リストの名前を入力してください</div>
+<div><input type="text" id="list_name"><button id="list_button" onclick="listnameClick()">決定</button></div>
+<div id="shift_list"></div>
+<div id="list_input"></div>
+
+
+
+
+
+<script>
+ 
+function listnameClick(){
+    event.preventDefault();
+    document.getElementById("list_speak").style.display ="none";
+    document.getElementById("list_name").style.display ="none";
+    document.getElementById("list_button").remove()
+    document.getElementById("list_input").insertAdjacentHTML('beforeEnd', `<div>シフトの名前を入力してください</div>`);
+    document.getElementById("list_input").insertAdjacentHTML('beforeEnd', `<input type="text" id="list"><button id="listadd_button" onclick="listaddnameClick()">追加</button><button id="listadd_button" onclick="railssendClick()">登録</button>`);
+    document.getElementById("list_input").insertAdjacentHTML('beforeEnd',`<div>リスト名：${document.getElementById("list_name").value}</div>`);
+    document.getElementById("list_name_rails").value = document.getElementById("list_name").value
+}
+var shiftarray = []
+var shiftmei = 1
+function listaddnameClick(){
+    event.preventDefault();
+    document.getElementById("list_input").insertAdjacentHTML('beforeEnd',`<div>シフト名${shiftmei}：${document.getElementById("list").value}</div>`);
+    shiftmei ++
+    shiftarray.push(document.getElementById("list").value)
+    document.getElementById("shift_name_rails").value = shiftarray
+    document.getElementById("list").value = ""
+}
+
+function railssendClick(){
+
+}
+</script>
+<% end %>

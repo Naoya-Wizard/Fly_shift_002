@@ -14,7 +14,8 @@ ActiveRecord::Schema.define(version: 2021_04_05_141009) do
 
   create_table "lists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "list"
+    t.string "listname"
+    t.text "shift"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_lists_on_user_id"
