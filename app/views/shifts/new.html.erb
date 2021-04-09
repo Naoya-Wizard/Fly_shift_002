@@ -9,7 +9,17 @@
 <div id="calender"></div>
 <div hidden><%= f.text_field :shift, id: "all-shift" %></div>
 
+<% @lists.each do | lists | %>
+    <% if current_user.id == lists.user.id %>
+        <% "・#{lists.listname}：" %><select><%= raw(lists.shift) %></select>
+    <% end %>
+<% end %>
 
+<%@lists.length.times do |i|%>
+
+    <div <%="id=test#{i}"%>><%= @lists[i].listname%></div>
+
+<%end%>
 
 <script>
 var ShiftList = ""

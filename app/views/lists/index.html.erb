@@ -1,12 +1,10 @@
 <%= form_with model:@list, url: lists_path, local: true do |f| %>
-<%= f.text_field :listname, id: "list_name_rails" %>
-<%= f.text_field :shift, id: "shift_name_rails" %>
+<div hidden><%= f.text_field :listname, id: "list_name_rails" %></div>
+<div hidden><%= f.text_field :shift, id: "shift_name_rails" %></div>
 
 <div>~過去に登録したリスト一覧~</div>
-<% testt="" %>
 <% @lists.each do | lists | %>
     <% if current_user.id == lists.user.id %>
-        <% testt += lists.shift %>
         <%= "・#{lists.listname}：" %><select><%= raw(lists.shift) %></select>
     <% end %>
 <% end %>
