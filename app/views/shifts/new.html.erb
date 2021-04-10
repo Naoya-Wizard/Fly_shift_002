@@ -9,16 +9,32 @@
 <div id="calender"></div>
 <div hidden><%= f.text_field :shift, id: "all-shift" %></div>
 
+<% @lists.each do | lists | %>
+    <% if current_user.id == lists.user.id %>
+        <% "・#{lists.listname}：" %><select><%= raw(lists.shift) %></select>
+    <% end %>
+<% end %>
 
+<%@lists.length.times do |i|%>
+
+    <div <%="id=test#{i}"%>><%= @lists[i].listname%></div>
+
+<%end%>
 
 <script>
 var ShiftList = ""
 function buttonClick(){
 event.preventDefault();
-     document.getElementById("shift_list").insertAdjacentHTML('beforeEnd', `<div>${document.getElementById("list_input").value}</div>`);
-     ShiftList += `<option>${document.getElementById("list_input").value}</option>`
-     document.getElementById("list_input").value = ""
+    if (document.getElementById("list_input").value != "") {
+         document.getElementById("shift_list").insertAdjacentHTML('beforeEnd', `<div>${document.getElementById("list_input").value}</div>`);
+         ShiftList += `<option>${document.getElementById("list_input").value}</option>`;
+         document.getElementById("list_input").value = "";
+    }
+    else  {
+        alert('シフトが入力されていません! 空白のシフトはデフォルトでついています!');
+        };
 }
+
 
 function calender(){
         event.preventDefault();
@@ -93,7 +109,6 @@ function calender(){
                 all_shift_array.push(document.getElementById(`shift-${i+1}`).value)
         }
         document.getElementById("all-shift").value = all_shift_array;
-        allform.submit();
         };
 };
 </script>

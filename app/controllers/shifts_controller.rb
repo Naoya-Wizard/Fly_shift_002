@@ -6,6 +6,7 @@ class ShiftsController < ApplicationController
 
     def new
         @shift = Shift.new
+        @lists = List.includes(:user)
     end
 
     def create
