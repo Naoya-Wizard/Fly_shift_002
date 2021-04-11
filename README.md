@@ -122,6 +122,8 @@ https://docs.google.com/spreadsheets/d/1kXHKEl2FXs5n0chtvUWUEuJdRaCx9lwCarb-dWgh
 
 - belongs_to :user
 
+## templates テーブル
+
 | Column             | Type      | Options                   |
 | ------------------ | --------- | ------------------------- |
 | template           | string    | null: false               |
