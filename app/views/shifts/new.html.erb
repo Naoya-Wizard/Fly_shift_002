@@ -11,13 +11,13 @@
 
 <% @lists.each do | lists | %>
     <% if current_user.id == lists.user.id %>
-        <% "・#{lists.listname}：" %><select><%= raw(lists.shift) %></select>
+        <% "・#{lists.listname}：" %><select hidden><% raw(lists.shift) %></select>
     <% end %>
 <% end %>
 
 <%@lists.length.times do |i|%>
 
-    <div <%="id=test#{i}"%>><%= @lists[i].listname%></div>
+    <div <%="id=test#{i}"%>><% @lists[i].listname%></div>
 
 <%end%>
 
@@ -94,6 +94,7 @@ function calender(){
         document.getElementById("list_input").style.display ="none";
         document.getElementById("button").style.display ="none";
         document.getElementById("add_button").style.display ="none";
+        document.getElementById("year-category").style.display ="none";
         document.getElementById("speak_month").style.display ="none";
         document.getElementById("month-category").style.display ="none";
         document.getElementById("shift_list").style.display ="none";
