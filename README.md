@@ -91,6 +91,7 @@ https://docs.google.com/spreadsheets/d/1kXHKEl2FXs5n0chtvUWUEuJdRaCx9lwCarb-dWgh
 シフトfly機能：googleAPIを利用できるようにする
 
 # データベース設計
+## ER図
 [![Image from Gyazo](https://i.gyazo.com/6b1ade5bd638c7e3e4696784b526a085.png)](https://gyazo.com/6b1ade5bd638c7e3e4696784b526a085)
 ## users テーブル
 
