@@ -11,19 +11,21 @@
 
 <% @lists.each do | lists | %>
     <% if current_user.id == lists.user.id %>
-        <% "・#{lists.listname}：" %><select hidden><% raw(lists.shift) %></select>
+       <div> <% "・#{lists.listname}：" %><select hidden><% raw(lists.shift) %></select> </div>
     <% end %>
 <% end %>
 
 <%@lists.length.times do |i|%>
 
-    <div <%="id=test#{i}"%>><% @lists[i].listname%></div>
+    <div <%="id=test#{i}"%>><%= @lists[i].listname%></div>
 
 <%end%>
 
 <script>
+
 var ShiftList = ""
 function buttonClick(){
+document.getElementById("template").hidden = true;
 event.preventDefault();
     if (document.getElementById("list_input").value != "") {
          document.getElementById("shift_list").insertAdjacentHTML('beforeEnd', `<div>${document.getElementById("list_input").value}</div>`);
