@@ -1,7 +1,4 @@
 <% if user_signed_in? %>
-    <%= link_to "シフトを作成する", new_shift_path, class: "shift-create" %>
-    <%= link_to "マイページ", lists_path, class: "list-index" %>
-
     <% @shifts.each do | shift | %>
     <%= link_to  shift_path(shift), class: "show-link" do %>
         <%if shift.user.id == current_user.id%>
