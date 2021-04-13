@@ -15,17 +15,28 @@
     <% end %>
 <% end %>
 
+<div hidden id="template">
+<div>テンプレートを使用することもできます！</div>
 <%@lists.length.times do |i|%>
-
-    <div <%="id=test#{i}"%>><%= @lists[i].listname%></div>
-
+    <div hidden <%="id=template_button#{i}-select"%>><%= @lists[i].shift %></div>
+    <button <%="id=template_button#{i}"%> onclick="OnLinkClick(this)"><%= "〜#{@lists[i].listname}〜"%><%= raw(@lists[i].shift) %></button>
 <%end%>
+</div>
 
 <script>
 
 var ShiftList = ""
+
+function OnLinkClick(element){
+    event.preventDefault()
+    ShiftList += document.getElementById(`${element.id}-select`).textContent
+    calender();
+
+}
+
+
 function buttonClick(){
-document.getElementById("template").hidden = true;
+
 event.preventDefault();
     if (document.getElementById("list_input").value != "") {
          document.getElementById("shift_list").insertAdjacentHTML('beforeEnd', `<div>${document.getElementById("list_input").value}</div>`);
