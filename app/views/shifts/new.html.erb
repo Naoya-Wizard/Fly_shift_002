@@ -31,13 +31,12 @@ function OnLinkClick(element){
     event.preventDefault()
     ShiftList += document.getElementById(`${element.id}-select`).textContent
     calender();
-
 }
 
 
 function buttonClick(){
 
-event.preventDefault();
+    event.preventDefault();
     if (document.getElementById("list_input").value != "") {
          document.getElementById("shift_list").insertAdjacentHTML('beforeEnd', `<div>${document.getElementById("list_input").value}</div>`);
          ShiftList += `<option>${document.getElementById("list_input").value}</option>`;
@@ -45,9 +44,8 @@ event.preventDefault();
     }
     else  {
         alert('シフトが入力されていません! 空白のシフトはデフォルトでついています!');
-        };
+    };
 }
-
 
 function calender(){
         event.preventDefault();
