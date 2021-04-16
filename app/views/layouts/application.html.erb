@@ -5,22 +5,25 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%# <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %> 
   </head>
   <header>
     <div class="header">
-      <%= link_to "FlyShift", root_path, class: "appname" %>
+      <div class="logo"><%= link_to image_tag('logo3.png'), root_path %></div>
       <% if user_signed_in?%>
-        <%= "こんにちは、#{current_user.nickname}さん" %>
-        <%= link_to "シフト作成", new_shift_path %>
-        <%= link_to "テンプレート作成", lists_path, class: "list-index" %>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout" %>
+        
+        <div class="icon_hello"><%= "こんにちは #{current_user.nickname} さん" %>
+          <div><%= link_to "ユーザー情報を編集する", edit_user_registration_path %></div>
+          <div><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout" %></div>
+        </div>
+        <div class="icon_hello"><%= link_to "シフト作成", new_shift_path %></div>
+        <div class="icon_hello"><%= link_to "テンプレート作成", lists_path %></div>
+        <div class="icon_hello"><%= link_to "FlyShift", root_path %><div>
       <% else %>
-        <%= link_to "ログイン", new_user_session_path, class: "login" %>
-        <%= link_to "新規登録", new_user_registration_path, class: "user-create" %>
+        <div class="icon_hello"><%= link_to "ログイン", new_user_session_path, class: "login" %></div>
+        <div class="icon_hello"><%= link_to "新規登録", new_user_registration_path, class: "user-create" %></div>
       <% end %>
     </div>
-
+  
   </header>
 
   <body>

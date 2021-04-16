@@ -1,28 +1,28 @@
-<%= form_with model:@shift, url: shifts_path, local: true do |f| %>
-<div id="speak_month">何年何月のシフトを作成しますか?</div>
-<div>
-    <%= f.collection_select(:year_id, Year.all, :id, :name, {}, {class:"select-box", id:"year-category"}) %>
-    <%= f.collection_select(:month_id, Month.all, :id, :name, {prompt: "選択してください"}, {class:"select-box", id:"month-category"}) %>
+<div class="shift_new">
+    <%= form_with model:@shift, url: shifts_path, local: true do |f| %>
+    <div id="speak_month" class="content_line">何年何月のシフトを作成しますか?</div>
+    <div>
+        <%= f.collection_select(:year_id, Year.all, :id, :name, {}, {class:"select-box", id:"year-category"}) %>
+        <%= f.collection_select(:month_id, Month.all, :id, :name, {prompt: "選択してください"}, {class:"select-box", id:"month-category"}) %>
+    </div>
+    <div hidden id="speak_shift" class="content_line"> </div>
+    <div id="shift_list"></div>
+    <div id="calender"></div>
+    <div hidden><%= f.text_field :shift, id: "all-shift" %></div>
+
+    <div class="template">
+        <div hidden id="template" >
+            <div class="content_line">テンプレートを使用することもできます！</div>
+            <%@lists.length.times do |i|%>
+                <% if current_user.id == @lists[i].user_id %>
+                    <div hidden <%="id=template_button#{i}-select"%>><%= @lists[i].shift %></div>
+                    <button <%="id=template_button#{i}"%> onclick="OnLinkClick(this)"><%= "〜#{@lists[i].listname}〜"%><%= raw(@lists[i].shift) %></button>
+                <% end %>
+            <%end%>
+        </div>
+    </div>
+
 </div>
-<div id="speak_shift"> </div>
-<div id="shift_list"></div>
-<div id="calender"></div>
-<div hidden><%= f.text_field :shift, id: "all-shift" %></div>
-
-<% @lists.each do | lists | %>
-    <% if current_user.id == lists.user.id %>
-       <div> <% "・#{lists.listname}：" %><select hidden><% raw(lists.shift) %></select> </div>
-    <% end %>
-<% end %>
-
-<div hidden id="template">
-<div>テンプレートを使用することもできます！</div>
-<%@lists.length.times do |i|%>
-    <div hidden <%="id=template_button#{i}-select"%>><%= @lists[i].shift %></div>
-    <button <%="id=template_button#{i}"%> onclick="OnLinkClick(this)"><%= "〜#{@lists[i].listname}〜"%><%= raw(@lists[i].shift) %></button>
-<%end%>
-</div>
-
 <script>
 
 var ShiftList = ""
@@ -108,6 +108,7 @@ function calender(){
         document.getElementById("year-category").style.display ="none";
         document.getElementById("speak_month").style.display ="none";
         document.getElementById("month-category").style.display ="none";
+        document.getElementById("template").style.display ="none";
         document.getElementById("shift_list").style.display ="none";
         document.getElementById("speak_shift").textContent = `カレンダーにシフトを入力してください！`;
         document.getElementById("speak_shift").insertAdjacentHTML('beforeEnd', ` <%= f.submit '終了' , id: "send_button" %>`);

@@ -2,21 +2,16 @@
 <div hidden><%= f.text_field :listname, id: "list_name_rails" %></div>
 <div hidden><%= f.text_field :shift, id: "shift_name_rails" %></div>
 
-<div>~過去に登録したリスト一覧~</div>
-<% @lists.each do | lists | %>
-    <% if current_user.id == lists.user.id %>
-        <%= "・#{lists.listname}：" %><select><%= raw(lists.shift) %></select>
+<div class="list_input">
+    <div class="content_line">過去に登録したリスト一覧</div>
+    <% @lists.each do | lists | %>
+        <% if current_user.id == lists.user.id %>
+            <%= "・#{lists.listname}：" %><select><%= raw(lists.shift) %></select>
+        <% end %>
     <% end %>
-<% end %>
-<div>~リストの新規作成~</div>
-<div id="list_input"></div>
-<div><input type="text" id="list_name" placeholder="リストの名前を入力"><button id="list_button" onclick="listnameClick()">決定</button></div>
-<div>~その他のメニュー~</div>
-<div><%= link_to "トップページへ戻る", root_path %></div>
-<div><%= link_to "シフトを作成する", new_shift_path %></div>
-<div><%= link_to "ユーザー情報を編集する", edit_user_registration_path %></div>
-<div><%= link_to "ログアウトする", destroy_user_session_path, method: :delete%></div>
-
+    <div id="list_input" class="content_line">テンプレートの新規作成</div>
+    <div><input type="text" id="list_name" placeholder="テンプレート名を入力"><button id="list_button" onclick="listnameClick()">決定</button></div>
+</div>
 
 
 <script>

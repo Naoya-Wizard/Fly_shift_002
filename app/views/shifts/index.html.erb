@@ -1,14 +1,23 @@
-<% if user_signed_in? %>
-    <% @shifts.each do | shift | %>
-    <%= link_to  shift_path(shift), class: "show-link" do %>
-        <%if shift.user.id == current_user.id%>
-            <div class="border"></div>
-            <% array = shift.shift.split(",").uniq! %>
-            <div><%= "作成日: #{shift.updated_at}"%></div>
-            <div><%= "シフト月: #{shift.year.name}#{shift.month.name}"%></div>
-            <div><%= "リスト: #{array.join(', ')}" %></div>
-            <%= link_to "削除", shift_path(shift), method: :delete, class:"shift-destroy" %>
-        <% end %>
+<div class="border">
+    <% if user_signed_in? %>
+        <% @shifts.each do | shift | %>
+            <%= link_to  shift_path(shift), class: "shift_link" do %>
+                <%if shift.user.id == current_user.id%>
+                    <% array = shift.shift.split(",").uniq! %>
+                    <div class="shift">
+                        
+                        <div class="pin"><%= link_to image_tag('pin5.png', :size =>'30x30'), root_path %></div>
+                        <div class="icon">
+                            <%= link_to image_tag('dust.png', :size =>'28x28') , shift_path(shift), method: :delete, class:"shift_link" %>
+                            <%= link_to image_tag('edit_icon.png', :size =>'28x28') , shift_path(shift) %>
+                        </div>
+
+                        <div>作成日:<span><%= " #{shift.updated_at}"%></span></div>
+                        <div>シフト月:<span><%= " #{shift.year.name}#{shift.month.name}"%></span></div>
+                        <div>内容:<span><%= " #{array.join(', ')}" %><span></div>
+                    </div>
+                <% end %>
+            <% end %>
         <% end %>
     <% end %>
-<% end %>
+</div>
