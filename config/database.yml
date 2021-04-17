@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: Fly_shift_002_production
-  username: Fly_shift_002
-  password: <%= ENV['FLY_SHIFT_002_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
