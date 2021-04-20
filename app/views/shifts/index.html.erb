@@ -4,8 +4,7 @@
             <%= link_to  shift_path(shift), class: "shift_link" do %>
                 <%if shift.user.id == current_user.id%>
                     <% array = shift.shift.split(",").uniq! %>
-                    <div class="shift">
-                        
+                    <div class="shift" style="background-image:url(<%= asset_path "fusen.png" %>)">
                         <div class="pin"><%= link_to image_tag('pin5.png', :size =>'30x30'), root_path %></div>
                         <div class="icon">
                             <%= link_to image_tag('dust.png', :size =>'28x28') , shift_path(shift), method: :delete, class:"shift_link" %>
