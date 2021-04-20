@@ -1,12 +1,7 @@
 .header{
-     /* margin-left: 100px; */
     width: 100vw;
     height: 150px;
     display: flex;
-    /* text-align: center; */
-    /* justify-content: center; */
-    /* background-image: url(fusen_head.png);  */
-    /* background-color: rgb(243, 240, 234); */
 }
 
 .logo{
@@ -83,6 +78,7 @@ body{
     font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
     /* background-image: url(CorkBoard01.jpg);  */
     width: 100vw;
+    height: 100vh;
 }
 span{
     color: gray;
