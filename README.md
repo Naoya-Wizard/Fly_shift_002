@@ -90,7 +90,7 @@ https://docs.google.com/spreadsheets/d/1kXHKEl2FXs5n0chtvUWUEuJdRaCx9lwCarb-dWgh
 
 
 # 実装予定の機能
-シフトfly機能：googleAPIを利用できるようにする
+シフトfly機能：googleAPIを利用し、google calender にシフトの内容を飛ばす事ができる
 
 # データベース設計
 ## ER図

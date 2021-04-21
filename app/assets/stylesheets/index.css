@@ -76,10 +76,19 @@ a{
 }
 body{
     font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
-    /* background-image: url(CorkBoard01.jpg);  */
     width: 100vw;
     height: 100vh;
 }
+
+.bgbody{
+  /* background-position: center center; */
+  /* background-size: 100%; */
+  /* background-repeat: repeat;
+  background-position: left; */
+  /* width: 100vh;
+  height: 100vh; */
+}
+
 span{
     color: gray;
 }

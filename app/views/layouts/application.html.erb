@@ -5,11 +5,10 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    
-
   </head>
   <header>
-    <div class="header" style="background-image:url(<%= asset_path "CorkBoard01.jpg" %>)">
+    <div style="background-image:url(<%= asset_path "CorkBoard01.jpg" %>)">
+    <div class="header">
       <div class="logo"><%= link_to image_tag('logo3.png'), root_path %></div>
       <% if user_signed_in?%>
         
@@ -25,12 +24,13 @@
         <div class="icon_hello"><%= link_to "新規登録", new_user_registration_path, class: "user-create" %></div>
       <% end %>
     </div>
+    </div>
   
   </header>
 
   <body>
     <div style="background-image:url(<%= asset_path "CorkBoard01.jpg" %>)">
-    <%= yield %>
+      <%= yield %>
     </div>
   </body>
 </html>
