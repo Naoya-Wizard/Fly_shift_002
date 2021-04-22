@@ -1,11 +1,10 @@
 .header{
-    width: 100vw;
+    width: 1400px;
     height: 150px;
     display: flex;
 }
 
 .logo{
-    
     padding-top: 20px;
     padding-left: 90px;
     width: 250px;
@@ -22,71 +21,46 @@ a{
 
 .icon_hello{
     color: black;
-    
     font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
     padding-top: 20px;
     padding-left: 30px;
- 
     width: 200px;
     height: 150px; 
-    
     background-image: url(fusen3.png);
     background-repeat: no-repeat;
     background-size:300px 120px;
-
 }
 
 .border{
     width: 100vw;
-    /* margin-top: 30px; */
-    /* border-bottom: solid 1px; */
     display: flex;
-    /* flex-direction: row; */
     flex-wrap: wrap;
     margin-left: 38px;
-    
-    
 }
 
 .icon{
     width: 50px;
-    /* padding-left: 20px; */
     display: inline
-    /* margin-top: 20px; */
-    /* border: solid 1px; */
 }
 .shift{
     font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
-    /* border: solid 3px rgb(202, 228, 88); */
-    /* background-color: rgb(210, 247, 162); */
     padding-left: 9px;
     padding-right: 8px;
-    /* background-image: url(fusen.png);  */
     background-size:300px 198px;
     background-repeat: no-repeat;
     width: 288px;
     height: 196px;
     margin: 5px;
-    
-    
 }
 .shift_line{
     color: chartreuse;
-    
 }
+
 body{
     font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
     width: 100vw;
-    height: 100vh;
-}
-
-.bgbody{
-  /* background-position: center center; */
-  /* background-size: 100%; */
-  /* background-repeat: repeat;
-  background-position: left; */
-  /* width: 100vh;
-  height: 100vh; */
+    height: 1000px;
+    overflow-y: scroll;
 }
 
 span{
@@ -104,7 +78,6 @@ span{
 
 .shift_new{
     font-size: 20px;
-    /* display: flex; */
     padding-left: 100px;
     padding-top: 150px;
     margin-left: 200px;
@@ -113,14 +86,9 @@ span{
     background-repeat: no-repeat;
     background-size:800px 800px;
 }
-.template{
-    /* margin-left: 100px; */
-    /* display: flex;
-    display: block; */
-}
+
 .list_input{
     font-size: 20px;
-    /* display: flex; */
     padding-left: 100px;
     padding-top: 150px;
     margin-left: 200px;
@@ -128,12 +96,9 @@ span{
     background-image: url(note2.png); 
     background-repeat: no-repeat;
     background-size:800px 800px;
-    
-
 }
+
 .content_line{
-    /* height: 30px; */
-    /* margin-top: 30px; */
     padding-bottom: 10px;
     background: bottom;
     background: left;
