@@ -6,6 +6,7 @@
     <div class="content_line" style="background-image:url(<%= asset_path "head011_02.png" %>)">過去に登録したリスト一覧</div>
     <% @lists.each do | lists | %>
         <% if current_user.id == lists.user.id %>
+            <%= link_to image_tag('dust.png', :size =>'28x28'), list_path(lists), method: :delete %>
             <%= "・#{lists.listname}：" %><select><%= raw(lists.shift) %></select>
         <% end %>
     <% end %>
