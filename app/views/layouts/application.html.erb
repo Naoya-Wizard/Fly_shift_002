@@ -9,7 +9,7 @@
 
   <header>
     <%# <div class="header"> %>
-      <div class="logo" style="background-image:url(<%= asset_path "fusen2.png" %>)"> <%= link_to image_tag('logo3.png'), root_path %> </div>
+      <div class="logo" style="background-image:url(<%= asset_path "fusen.png" %>)"> <%= link_to image_tag('logo3.png'), root_path %> </div>
       <% if user_signed_in?%>
         <div class="icon_hello" style="background-image:url(<%= asset_path "fusen3.png" %>)"><%= "こんにちは #{current_user.nickname} さん" %>
           <div><%= link_to "ユーザー情報を編集する", edit_user_registration_path %></div>
