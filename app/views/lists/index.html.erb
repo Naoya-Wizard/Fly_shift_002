@@ -2,14 +2,14 @@
 <div hidden><%= f.text_field :listname, id: "list_name_rails" %></div>
 <div hidden><%= f.text_field :shift, id: "shift_name_rails" %></div>
 
-<div class="list_input">
-    <div class="content_line">過去に登録したリスト一覧</div>
+<div class="list_input" style="background-image:url(<%= asset_path "note2.png" %>)">
+    <div class="content_line" style="background-image:url(<%= asset_path "head011_02.png" %>)">過去に登録したリスト一覧</div>
     <% @lists.each do | lists | %>
         <% if current_user.id == lists.user.id %>
             <%= "・#{lists.listname}：" %><select><%= raw(lists.shift) %></select>
         <% end %>
     <% end %>
-    <div id="list_input" class="content_line">テンプレートの新規作成</div>
+    <div id="list_input" class="content_line" style="background-image:url(<%= asset_path "head011_02.png" %>)">テンプレートの新規作成</div>
     <div><input type="text" id="list_name" placeholder="テンプレート名を入力"><button id="list_button" onclick="listnameClick()">決定</button></div>
 </div>
 

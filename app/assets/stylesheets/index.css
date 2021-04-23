@@ -80,7 +80,6 @@ span{
     padding-top: 150px;
     margin-left: 200px;
     height: 1000px;
-    background-image: url(note2.png); 
     background-repeat: no-repeat;
     background-size:800px 800px;
 }
@@ -91,7 +90,6 @@ span{
     padding-top: 150px;
     margin-left: 200px;
     height: 1000px;
-    background-image: url(note2.png); 
     background-repeat: no-repeat;
     background-size:800px 800px;
 }
@@ -100,7 +98,6 @@ span{
     padding-bottom: 10px;
     background: bottom;
     background: left;
-    background-image: url(head011_02.png); 
     background-repeat: no-repeat;
     background-size: 400px 8px;
 }

@@ -1,18 +1,18 @@
-<div class="shift_new">
+<div class="shift_new" style="background-image:url(<%= asset_path "note2.png" %>)">
     <%= form_with model:@shift, url: shifts_path, local: true do |f| %>
-    <div id="speak_month" class="content_line">何年何月のシフトを作成しますか?</div>
+    <div id="speak_month" class="content_line" style="background-image:url(<%= asset_path "head011_02.png" %>)">何年何月のシフトを作成しますか?</div>
     <div>
         <%= f.collection_select(:year_id, Year.all, :id, :name, {}, {class:"select-box", id:"year-category"}) %>
         <%= f.collection_select(:month_id, Month.all, :id, :name, {prompt: "選択してください"}, {class:"select-box", id:"month-category"}) %>
     </div>
-    <div hidden id="speak_shift" class="content_line"> </div>
+    <div hidden id="speak_shift" class="content_line" style="background-image:url(<%= asset_path "head011_02.png" %>)"> </div>
     <div id="shift_list"></div>
     <div id="calender"></div>
     <div hidden><%= f.text_field :shift, id: "all-shift" %></div>
 
     <div class="template">
         <div hidden id="template" >
-            <div class="content_line">テンプレートを使用することもできます！</div>
+            <div class="content_line" style="background-image:url(<%= asset_path "head011_02.png" %>)">テンプレートを使用することもできます！</div>
             <%@lists.length.times do |i|%>
                 <% if current_user.id == @lists[i].user_id %>
                     <div hidden <%="id=template_button#{i}-select"%>><%= @lists[i].shift %></div>
