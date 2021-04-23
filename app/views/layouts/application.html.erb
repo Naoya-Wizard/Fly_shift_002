@@ -15,7 +15,7 @@
           <div><%= link_to "ユーザー情報を編集する", edit_user_registration_path %></div>
           <div><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout" %></div>
         </div>
-        <div class="icon_hello" style="background:url(<%= asset_path "fusen3.png" %>)"><%= link_to "シフト作成", new_shift_path %></div>
+        <div class="icon_hello" style="background-image:url(<%= asset_path "fusen3.png" %>)"><%= link_to "シフト作成", new_shift_path %></div>
         <div class="icon_hello" style="background-image:url(<%= asset_path "fusen3.png" %>)"><%= link_to "テンプレート作成", lists_path %></div>
         <div class="icon_hello" style="background-image:url(<%= asset_path "fusen3.png" %>)"><%= link_to "FlyShift", root_path %><div>
       <% else %>
