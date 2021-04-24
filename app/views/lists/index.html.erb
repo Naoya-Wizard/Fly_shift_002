@@ -8,7 +8,7 @@
                         <div class="icon">
                             <%= link_to image_tag('dust.png', :size =>'28x28'), list_path(list), method: :delete %>
                             <img src="<%= asset_path 'edit_icon.png' %>" height="28" width="28" onclick="edit_templeat()" >
-                            <div><%= "テンプレート名：#{list.listname}" %></div>
+                            <div>テンプレート名：<span><%= list.listname %></span></div>
                             <div><%= "内容："%><select><%= raw(list.shift) %></select></div>
                         </div>
                     </div>
@@ -19,13 +19,12 @@
 </div>
 
 <%= form_with model:@list, url: lists_path, local: true do |f| %>
-<div hidden><%= f.text_field :listname, id: "list_name_rails" %></div>
-<div hidden><%= f.text_field :shift, id: "shift_name_rails" %></div>
-
-<div class="list_input" style="background-image:url(<%= asset_path "note2.png" %>)">
-    <div id="list_input" class="content_line" style="background-image:url(<%= asset_path "head011_02.png" %>)">テンプレートの新規作成</div>
-    <div><input type="text" id="list_name" placeholder="テンプレート名を入力"><button id="list_button" onclick="listnameClick()">決定</button></div>
-</div>
+    <div hidden><%= f.text_field :listname, id: "list_name_rails" %></div>
+    <div hidden><%= f.text_field :shift, id: "shift_name_rails" %></div>
+    <div class="list_input" style="background-image:url(<%= asset_path "note2.png" %>)">
+        <div id="list_input" class="content_line" style="background-image:url(<%= asset_path "head011_02.png" %>)">テンプレートの新規作成</div>
+        <div><input type="text" id="list_name" placeholder="テンプレート名を入力"><button id="list_button" onclick="listnameClick()">決定</button></div>
+    </div>
 
 
 <script>
@@ -58,4 +57,5 @@ function edit_templeat(){
 };
 
 </script>
+
 <% end %>
