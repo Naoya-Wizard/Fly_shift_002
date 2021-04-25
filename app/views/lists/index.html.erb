@@ -23,7 +23,7 @@
     <div hidden><%= f.text_field :shift, id: "shift_name_rails" %></div>
     <div class="list_input" style="background-image:url(<%= asset_path "note2.png" %>)">
         <div id="list_input" class="content_line" style="background-image:url(<%= asset_path "head011_02.png" %>)">テンプレートの新規作成</div>
-        <div><input type="text" id="list_name" placeholder="テンプレート名を入力"><button id="list_button" onclick="listnameClick()">決定</button></div>
+        <div id="templeat_add"><input type="text" id="list_name" placeholder="テンプレート名を入力"><button id="list_button" onclick="listnameClick()">決定</button></div>
     </div>
 
 
@@ -31,12 +31,11 @@
  
 function listnameClick(){
     event.preventDefault();
-    // document.getElementById("list_speak").style.display ="none";
     document.getElementById("list_name").style.display ="none";
     document.getElementById("list_button").remove()
-    document.getElementById("list_input").insertAdjacentHTML('beforeEnd', `<div></div>`);
-    document.getElementById("list_input").insertAdjacentHTML('beforeEnd', `<input type="text" id="list" placeholder="シフトの名前を入力"><button id="listadd_button" onclick="listaddnameClick()">追加</button><button id="listadd_button" onclick="railssendClick()">登録</button>`);
-    document.getElementById("list_input").insertAdjacentHTML('beforeEnd',`<div>リスト名：${document.getElementById("list_name").value}</div>`);
+    document.getElementById("templeat_add").insertAdjacentHTML('beforeEnd', `<div></div>`);
+    document.getElementById("templeat_add").insertAdjacentHTML('beforeEnd', `<input type="text" id="list" placeholder="シフトの名前を入力"><button id="listadd_button" onclick="listaddnameClick()">追加</button><button id="listadd_button" onclick="railssendClick()">登録</button>`);
+    document.getElementById("templeat_add").insertAdjacentHTML('beforeEnd',`<div>リスト名：${document.getElementById("list_name").value}</div>`);
     document.getElementById("list_name_rails").value = document.getElementById("list_name").value
 }
 
@@ -44,7 +43,7 @@ var allshiftname = ""
 var shiftmei = 1
 function listaddnameClick(){
     event.preventDefault();
-    document.getElementById("list_input").insertAdjacentHTML('beforeEnd',`<div>シフト名${shiftmei}：${document.getElementById("list").value}</div>`);
+    document.getElementById("templeat_add").insertAdjacentHTML('beforeEnd',`<div>シフト名${shiftmei}：${document.getElementById("list").value}</div>`);
     shiftmei ++
     allshiftname += `<option>${document.getElementById("list").value}</option>`
     document.getElementById("shift_name_rails").value = allshiftname
@@ -54,6 +53,7 @@ function listaddnameClick(){
 function edit_templeat(){
     event.preventDefault();
     alert('Click');
+    document.getElementById("edit_remove").remove()
 };
 
 </script>
