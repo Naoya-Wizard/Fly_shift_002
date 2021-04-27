@@ -1,15 +1,21 @@
 <div class="border">
     <% if user_signed_in? %>
-        <% @lists.each do | list | %>
+        <% @lists.each_with_index do | list, i | %>
             <%= link_to  list_path(list), class: "shift_link" do %>
                 <%if list.user.id == current_user.id%>
                     <div class="shift" style="background-image:url(<%= asset_path "fusen5.png" %>)">
                         <div class="pin"><%= link_to image_tag('pin.png', :size =>'30x30'), root_path %></div>
                         <div class="icon">
                             <%= link_to image_tag('dust.png', :size =>'28x28'), list_path(list), method: :delete %>
-                            <img src="<%= asset_path 'edit_icon.png' %>" height="28" width="28" onclick="edit_templeat()" >
+                            <img <%="id=#{i}"%> src="<%= asset_path 'edit_icon.png' %>" height="28" width="28" onclick="edit_templeat(this)" >
+                            <div hidden <%="id=temp_name_js#{i}"%> > <%= list.listname %> </div>
                             <div>テンプレート名：<span><%= list.listname %></span></div>
-                            <div><%= "内容："%><select><%= raw(list.shift) %></select></div>
+                            <div ><%= "内容："%><select><%= raw(list.shift) %></select></div>
+                            <div <%="id=temp_shift_js#{i}"%> >
+                                <% list.shift.gsub(/<option>/, "").split("</option>").length.times do |j| %>
+                                    <div hidden <%= "id=temp_shift_js#{i}_child#{j}" %> > <%= list.shift.gsub(/<option>/, "").split("</option>")[j] %> </div>
+                                <% end %>
+                            </div>
                         </div>
                     </div>
                 <% end %>
@@ -22,8 +28,9 @@
     <div hidden><%= f.text_field :listname, id: "list_name_rails" %></div>
     <div hidden><%= f.text_field :shift, id: "shift_name_rails" %></div>
     <div class="list_input" style="background-image:url(<%= asset_path "note2.png" %>)">
+        <div id="edit_templeat"></div> 
         <div id="list_input" class="content_line" style="background-image:url(<%= asset_path "head011_02.png" %>)">テンプレートの新規作成</div>
-        <div><input type="text" id="list_name" placeholder="テンプレート名を入力"><button id="list_button" onclick="listnameClick()">決定</button></div>
+        <div id="templeat_add"><input type="text" id="list_name" placeholder="テンプレート名を入力"><button id="list_button" onclick="listnameClick()">決定</button></div>
     </div>
 
 
@@ -31,12 +38,11 @@
  
 function listnameClick(){
     event.preventDefault();
-    // document.getElementById("list_speak").style.display ="none";
     document.getElementById("list_name").style.display ="none";
     document.getElementById("list_button").remove()
-    document.getElementById("list_input").insertAdjacentHTML('beforeEnd', `<div></div>`);
-    document.getElementById("list_input").insertAdjacentHTML('beforeEnd', `<input type="text" id="list" placeholder="シフトの名前を入力"><button id="listadd_button" onclick="listaddnameClick()">追加</button><button id="listadd_button" onclick="railssendClick()">登録</button>`);
-    document.getElementById("list_input").insertAdjacentHTML('beforeEnd',`<div>リスト名：${document.getElementById("list_name").value}</div>`);
+    document.getElementById("templeat_add").insertAdjacentHTML('beforeEnd', `<div></div>`);
+    document.getElementById("templeat_add").insertAdjacentHTML('beforeEnd', `<input type="text" id="list" placeholder="シフトの名前を入力"><button id="listadd_button" onclick="listaddnameClick()">追加</button><button id="listadd_button" onclick="railssendClick()">登録</button>`);
+    document.getElementById("templeat_add").insertAdjacentHTML('beforeEnd',`<div>リスト名：${document.getElementById("list_name").value}</div>`);
     document.getElementById("list_name_rails").value = document.getElementById("list_name").value
 }
 
@@ -44,16 +50,41 @@ var allshiftname = ""
 var shiftmei = 1
 function listaddnameClick(){
     event.preventDefault();
-    document.getElementById("list_input").insertAdjacentHTML('beforeEnd',`<div>シフト名${shiftmei}：${document.getElementById("list").value}</div>`);
+    document.getElementById("templeat_add").insertAdjacentHTML('beforeEnd',`<div>シフト名${shiftmei}：${document.getElementById("list").value}</div>`);
     shiftmei ++
     allshiftname += `<option>${document.getElementById("list").value}</option>`
     document.getElementById("shift_name_rails").value = allshiftname
     document.getElementById("list").value = ""
 }
 
-function edit_templeat(){
+function edit_templeat(element){
     event.preventDefault();
-    alert('Click');
+    var TmpName = document.getElementById(`temp_name_js${element.id}`).textContent
+    document.getElementById("temp_name_js${element.id}")
+    document.getElementById("list_input").remove()
+    document.getElementById("templeat_add").remove()
+    document.getElementById("edit_templeat").insertAdjacentHTML('beforeEnd',`<div>テンプレート名：${TmpName}<%= f.submit '更新' , id: "send_button" %></div>`);
+    var count = document.getElementById(`temp_shift_js${element.id}`).childElementCount;
+
+    for (i=0; i < count; i++){
+        var Shift = document.getElementById(`temp_shift_js${element.id}_child${i}`).textContent
+        document.getElementById("edit_templeat").insertAdjacentHTML('beforeEnd',`<div >シフト名${i+1}：<input id=edit_child${i+1} type="text" value="${Shift}"></div>`);
+        if(i == (count - 1)){
+            for(j = 0; j < 3; j++){
+                document.getElementById("edit_templeat").insertAdjacentHTML('beforeEnd',`<div >シフト名${i+1+j+1}：<input id=edit_child${i+1+j+1} type="text" value="" placeholder="追加できます"></div>`);
+                if(j==2){
+                    document.getElementById("edit_templeat").insertAdjacentHTML('beforeEnd',`<div id="pulse_icon" ><img src="<%= asset_path 'pulse.png' %>" height="28" width="28" onclick="add_shift(this)" ></div>`);
+                };
+            };
+        };
+    };
+};
+
+function add_shift(element){
+    document.getElementById("pulse_icon").remove()
+    var AddCount = document.getElementById("edit_templeat").childElementCount;
+    document.getElementById("edit_templeat").insertAdjacentHTML('beforeEnd',`<div id=edit_child${AddCount}>シフト名${AddCount}：<input type="text" value="" placeholder="追加できます"></div>`);
+    document.getElementById("edit_templeat").insertAdjacentHTML('beforeEnd',`<div id="pulse_icon" ><img src="<%= asset_path 'pulse.png' %>" height="28" width="28" onclick="add_shift(this)" ></div>`);
 };
 
 </script>
