@@ -9,6 +9,9 @@
                     <% if array.length == j+1 %>
                         <% 3.times do |i|  %>
                             <div><%= "シフト名#{j+1+i+1}："%> <input <%= "id=edit_child#{j+1+i+1}" %> type="text" placeholder="追加できます" ></div>
+                            <% if i == 2 %>
+                                <div id="pulse_icon" ><img src="<%= asset_path 'pulse.png' %>" height="28" width="28" onclick="add_shift(this)" ></div>
+                            <% end %>
                         <% end %>
                     <% end %>
             <% end %>
@@ -16,3 +19,13 @@
     </div>
 <% end %>
 
+<script>
+
+function add_shift(element){
+    document.getElementById("pulse_icon").remove()
+    var AddCount = document.getElementById("temp_shift_js").childElementCount;
+    document.getElementById("temp_shift_js").insertAdjacentHTML('beforeEnd',`<div id=edit_child${AddCount}>シフト名${AddCount}： <input type="text" value="" placeholder="追加できます"></div>`);
+    document.getElementById("temp_shift_js").insertAdjacentHTML('beforeEnd',`<div id="pulse_icon" ><img src="<%= asset_path 'pulse.png' %>" height="28" width="28" onclick="add_shift(this)" ></div>`);
+};
+
+</script>
