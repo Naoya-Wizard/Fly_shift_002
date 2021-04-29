@@ -1,19 +1,21 @@
-<%= form_with model: @list, local: true do |f| %>
+<%= form_with model: @list do |f| %>
     <div class="shift_new" style="background-image:url(<%= asset_path "note2.png" %>)">
-        <div><%= f.submit '更新' , id: "send_button" %></div>
+        <div><%= f.text_field :listname, id: "list_name_rails" %></div>
+        <div><%= f.text_field :shift, id: "shift_name_rails" %></div>
+        <div><button id="list_button" onclick="send_button()">更新</button></div>
         <div id="temp_shift_js">
             <div><%= "テンプレート名："%> <input <%= "id=edit_templeat_name" %> type="text" <%= "value=#{@list.listname}" %> ></div>
             <% array = @list.shift.gsub(/<option>/, "").split("</option>") %>
-                <% array.length.times do |j| %>
-                    <div> <%= "シフト名#{j+1}："%> <input <%= "id=edit_child#{j+1}" %> type="text" <%= "value=#{array[j]}" %> ></div>
-                    <% if array.length == j+1 %>
-                        <% 3.times do |i|  %>
-                            <div><%= "シフト名#{j+1+i+1}："%> <input <%= "id=edit_child#{j+1+i+1}" %> type="text" placeholder="追加できます" ></div>
-                            <% if i == 2 %>
-                                <div id="pulse_icon" ><img src="<%= asset_path 'pulse.png' %>" height="28" width="28" onclick="add_shift(this)" ></div>
-                            <% end %>
+            <% array.length.times do |j| %>
+                <div> <%= "シフト名#{j+1}："%> <input <%= "id=edit_child#{j+1}" %> type="text" <%= "value=#{array[j]}" %> ></div>
+                <% if array.length == j+1 %>
+                    <% 3.times do |i|  %>
+                        <div><%= "シフト名#{j+1+i+1}："%> <input <%= "id=edit_child#{j+1+i+1}" %> type="text" placeholder="追加できます" ></div>
+                        <% if i == 2 %>
+                            <div id="pulse_icon" ><img src="<%= asset_path 'pulse.png' %>" height="28" width="28" onclick="add_shift(this)" ></div>
                         <% end %>
                     <% end %>
+                <% end %>
             <% end %>
         </div>
     </div>
@@ -24,8 +26,23 @@
 function add_shift(element){
     document.getElementById("pulse_icon").remove()
     var AddCount = document.getElementById("temp_shift_js").childElementCount;
-    document.getElementById("temp_shift_js").insertAdjacentHTML('beforeEnd',`<div id=edit_child${AddCount}>シフト名${AddCount}： <input type="text" value="" placeholder="追加できます"></div>`);
+    document.getElementById("temp_shift_js").insertAdjacentHTML('beforeEnd',`<div>シフト名${AddCount}： <input id=edit_child${AddCount} type="text" value="" placeholder="追加できます"></div>`);
     document.getElementById("temp_shift_js").insertAdjacentHTML('beforeEnd',`<div id="pulse_icon" ><img src="<%= asset_path 'pulse.png' %>" height="28" width="28" onclick="add_shift(this)" ></div>`);
+};
+
+var allshiftname = ""
+function send_button(){
+    // event.preventDefault();
+    document.getElementById("list_name_rails").value = document.getElementById("edit_templeat_name").value
+    var count = document.getElementById("temp_shift_js").childElementCount;
+    for (i=0; i<count-2; i++){
+        if(document.getElementById(`edit_child${i+1}`).value == ""){
+            break;
+        };
+        console.log(document.getElementById(`edit_child${i+1}`).value);
+        allshiftname += `<option>${document.getElementById(`edit_child${i+1}`).value}</option>`
+    };
+    document.getElementById("shift_name_rails").value = allshiftname
 };
 
 </script>

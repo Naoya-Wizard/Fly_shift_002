@@ -17,11 +17,7 @@ def destroy
     redirect_to lists_path
 end
 
-def show
-end
 
-def update
-end
 
 def show
     @list = List.find(params[:id])
