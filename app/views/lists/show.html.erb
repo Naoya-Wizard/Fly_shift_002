@@ -1,4 +1,18 @@
 <%= form_with model: @list, local: true do |f| %>
-
-<%= f.submit '更新' , id: "send_button" %>
+    <div class="shift_new" style="background-image:url(<%= asset_path "note2.png" %>)">
+        <div><%= f.submit '更新' , id: "send_button" %></div>
+        <div id="temp_shift_js">
+            <div><%= "テンプレート名："%> <input <%= "id=edit_templeat_name" %> type="text" <%= "value=#{@list.listname}" %> ></div>
+            <% array = @list.shift.gsub(/<option>/, "").split("</option>") %>
+                <% array.length.times do |j| %>
+                    <div> <%= "シフト名#{j+1}："%> <input <%= "id=edit_child#{j+1}" %> type="text" <%= "value=#{array[j]}" %> ></div>
+                    <% if array.length == j+1 %>
+                        <% 3.times do |i|  %>
+                            <div><%= "シフト名#{j+1+i+1}："%> <input <%= "id=edit_child#{j+1+i+1}" %> type="text" placeholder="追加できます" ></div>
+                        <% end %>
+                    <% end %>
+            <% end %>
+        </div>
+    </div>
 <% end %>
+
