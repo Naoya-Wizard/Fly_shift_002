@@ -20,6 +20,13 @@ end
 def show
 end
 
+def update
+end
+
+def show
+    @list = List.find(params[:id])
+end
+
 private
 
 def list_params
