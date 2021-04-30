@@ -1,7 +1,7 @@
-<%= form_with model: @list do |f| %>
+<%= form_with model: @list, local: true do |f| %>
     <div class="shift_new" style="background-image:url(<%= asset_path "note2.png" %>)">
-        <div><%= f.text_field :listname, id: "list_name_rails" %></div>
-        <div><%= f.text_field :shift, id: "shift_name_rails" %></div>
+        <div hidden><%= f.text_field :listname, id: "list_name_rails" %></div>
+        <div hidden><%= f.text_field :shift, id: "shift_name_rails" %></div>
         <div><button id="list_button" onclick="send_button()">更新</button></div>
         <div id="temp_shift_js">
             <div><%= "テンプレート名："%> <input <%= "id=edit_templeat_name" %> type="text" <%= "value=#{@list.listname}" %> ></div>
