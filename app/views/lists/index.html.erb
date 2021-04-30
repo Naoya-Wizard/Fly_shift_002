@@ -3,11 +3,12 @@
         <% @lists.each_with_index do | list, i | %>
             <%= link_to  list_path(list), class: "shift_link" do %>
                 <%if list.user.id == current_user.id%>
+                    <div hidden id="list_id"><%= list.id %></div>
                     <div class="shift" style="background-image:url(<%= asset_path "fusen5.png" %>)">
                         <div class="pin"><%= link_to image_tag('pin.png', :size =>'30x30'), root_path %></div>
                         <div class="icon">
                             <%= link_to image_tag('dust.png', :size =>'28x28'), list_path(list), method: :delete %>
-                            <img <%="id=#{i}"%> src="<%= asset_path 'edit_icon.png' %>" height="28" width="28" onclick="edit_templeat(this)" >
+                            <%= link_to image_tag('edit_icon.png', :size =>'28x28'), list_path(list) %>
                             <div hidden <%="id=temp_name_js#{i}"%> > <%= list.listname %> </div>
                             <div>テンプレート名：<span><%= list.listname %></span></div>
                             <div ><%= "内容："%><select><%= raw(list.shift) %></select></div>
@@ -80,12 +81,6 @@ function edit_templeat(element){
     };
 };
 
-function add_shift(element){
-    document.getElementById("pulse_icon").remove()
-    var AddCount = document.getElementById("edit_templeat").childElementCount;
-    document.getElementById("edit_templeat").insertAdjacentHTML('beforeEnd',`<div id=edit_child${AddCount}>シフト名${AddCount}：<input type="text" value="" placeholder="追加できます"></div>`);
-    document.getElementById("edit_templeat").insertAdjacentHTML('beforeEnd',`<div id="pulse_icon" ><img src="<%= asset_path 'pulse.png' %>" height="28" width="28" onclick="add_shift(this)" ></div>`);
-};
 
 </script>
 
