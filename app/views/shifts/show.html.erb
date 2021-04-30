@@ -1,5 +1,7 @@
 <%= form_with model: @shift, local: true do |f| %>
-
+<div class="shift_new" style="background-image:url(<%= asset_path "note2.png" %>)">
+<div id="list_input" class="content_line" style="background-image:url(<%= asset_path "head011_02.png" %>)">シフトの編集</div>
+<%= f.submit '更新' , id: "send_button" %>
 <% array = @shift.shift.split(",") %>
 <div hidden><%= f.text_field :shift, id: "all-shift" %></div>
 <div hidden id="shift-1"><%= array[0] %></div>
@@ -37,7 +39,6 @@
 <div hidden id="year-category"><%= @shift.year_id %></div>
 <div hidden id="month-category"><%= @shift.month_id %></div>
 <div id="calender"></div>
-<%= f.submit '更新' , id: "send_button" %>
 
 
 
