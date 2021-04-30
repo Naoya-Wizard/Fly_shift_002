@@ -1,5 +1,6 @@
 <%= form_with model: @list, local: true do |f| %>
     <div class="shift_new" style="background-image:url(<%= asset_path "note2.png" %>)">
+    <div id="list_input" class="content_line" style="background-image:url(<%= asset_path "head011_02.png" %>)">テンプレートの編集</div>
         <div hidden><%= f.text_field :listname, id: "list_name_rails" %></div>
         <div hidden><%= f.text_field :shift, id: "shift_name_rails" %></div>
         <div><button id="list_button" onclick="send_button()">更新</button></div>
@@ -32,7 +33,6 @@ function add_shift(element){
 
 var allshiftname = ""
 function send_button(){
-    // event.preventDefault();
     document.getElementById("list_name_rails").value = document.getElementById("edit_templeat_name").value
     var count = document.getElementById("temp_shift_js").childElementCount;
     for (i=0; i<count-2; i++){
