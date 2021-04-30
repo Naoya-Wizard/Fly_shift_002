@@ -69,7 +69,6 @@ https://docs.google.com/spreadsheets/d/1kXHKEl2FXs5n0chtvUWUEuJdRaCx9lwCarb-dWgh
 
 # 実装した機能についての画像やGIFおよびその説明
 ## シフト作成機能を使用するGIF
-# ※見せたいところを集約
 - TOPページからの遷移、作成するシフトの年月を指定
 [![Image from Gyazo](https://i.gyazo.com/d11862aff1e3704b90817e8db8f20d33.gif)](https://gyazo.com/d11862aff1e3704b90817e8db8f20d33)
 - シフトを入力し ***追加*** する
@@ -135,5 +134,3 @@ https://docs.google.com/spreadsheets/d/1kXHKEl2FXs5n0chtvUWUEuJdRaCx9lwCarb-dWgh
 
 - belongs_to :user
 
-# ローカルでの動作方法
-アプリを１からリファクタリング予定です。終わり次第UPします。
