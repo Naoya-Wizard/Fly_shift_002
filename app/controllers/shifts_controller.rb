@@ -1,4 +1,6 @@
 class ShiftsController < ApplicationController
+    before_action :set_params, only: [:destroy, :update, :show]
+    before_action :move_to_index, except: [:index, :new, :create]
 
     def index
         @shifts = Shift.includes(:user).order("created_at DESC")
@@ -19,17 +21,14 @@ class ShiftsController < ApplicationController
     end
 
     def destroy
-        @shift = Shift.find(params[:id])
         @shift.destroy
         redirect_to root_path
     end
 
     def show
-        @shift = Shift.find(params[:id])
     end
 
     def update
-        @shift = Shift.find(params[:id])
         if @shift.update(shift_params)
             redirect_to root_path
         else
@@ -40,5 +39,15 @@ class ShiftsController < ApplicationController
     private
     def shift_params
         params.require(:shift).permit(:month_id, :year_id, :shift).merge(user_id: current_user.id)
+    end
+
+    def move_to_index
+        if @shift.user.id != current_user.id
+            redirect_to root_path
+        end
+    end
+
+    def set_params
+        @shift = Shift.find(params[:id])
     end
 end
