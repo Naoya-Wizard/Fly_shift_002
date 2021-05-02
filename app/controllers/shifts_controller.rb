@@ -3,7 +3,7 @@ class ShiftsController < ApplicationController
     before_action :move_to_index, except: [:index, :new]
 
     def index
-        @shift = Shift.includes(:user).order("created_at DESC")
+        @shifts = Shift.includes(:user).order("created_at DESC")
     end
 
     def new
