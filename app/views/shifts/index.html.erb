@@ -1,6 +1,6 @@
 <div class="border">
     <% if user_signed_in? %>
-        <% @shifts.each do | shift | %>
+        <% @shift.each do | shift | %>
             <%= link_to  shift_path(shift), class: "shift_link" do %>
                 <%if shift.user.id == current_user.id%>
                     <% array = shift.shift.split(",").uniq! %>

@@ -1,7 +1,8 @@
 class ShiftsController < ApplicationController
+    before_action :move_to_index, except: [:index, :new]
 
     def index
-        @shifts = Shift.includes(:user).order("created_at DESC")
+        @shift = Shift.includes(:user).order("created_at DESC")
     end
 
     def new
@@ -40,5 +41,12 @@ class ShiftsController < ApplicationController
     private
     def shift_params
         params.require(:shift).permit(:month_id, :year_id, :shift).merge(user_id: current_user.id)
+    end
+
+    def move_to_index
+        @shift = Shift.find(params[:id])
+        if @shift.user.id != current_user.id
+            redirect_to root_path
+        end
     end
 end
