@@ -1,6 +1,6 @@
 class ShiftsController < ApplicationController
     before_action :set_params, only: [:destroy, :update, :show]
-    before_action :move_to_index, except: [:index, :new]
+    before_action :move_to_index, except: [:index, :new, :create]
 
     def index
         @shifts = Shift.includes(:user).order("created_at DESC")

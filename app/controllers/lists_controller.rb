@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
-
-    before_action :move_to_index, except: :index
+    before_action :set_params, except: [:index, :create]
+    before_action :move_to_index, except: [:index, :create]
 
 def index 
     @lists = List.includes(:user)
@@ -14,23 +14,19 @@ def create
 end
 
 def destroy
-    @list = List.find(params[:id])
     @list.destroy
     redirect_to lists_path
 end
 
 def update
-    @list = List.find(params[:id])
     if @list.update(list_update_params)
         redirect_to lists_path
     else
-        binding.pry
         render :show
     end
 end
 
 def show
-    @list = List.find(params[:id])
 end
 
 private
@@ -44,10 +40,13 @@ def list_params
 end
 
 def move_to_index
-    @list = List.find(params[:id])
     if @list.user.id != current_user.id
         redirect_to lists_path
     end
+end
+
+def set_params
+    @list = List.find(params[:id])
 end
 
 end
