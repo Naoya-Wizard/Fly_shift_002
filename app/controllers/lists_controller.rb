@@ -22,7 +22,7 @@ def update
     if @list.update(list_update_params)
         redirect_to lists_path
     else
-        render :show
+        redirect_to list_path(params[:id]), notice: "DBへの保存に失敗しました(テンプレート名やシフト名が空の可能性があります)"
     end
 end
 

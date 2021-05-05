@@ -101,3 +101,9 @@ span{
     background-repeat: no-repeat;
     background-size: 400px 8px;
 }
+
+.error{
+    color: red;
+    font-size: 15px;
+    font-style: italic;
+}

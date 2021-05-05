@@ -4,6 +4,7 @@
         <div hidden><%= f.text_field :listname, id: "list_name_rails" %></div>
         <div hidden><%= f.text_field :shift, id: "shift_name_rails" %></div>
         <div><button id="list_button" onclick="send_button()">更新</button></div>
+        <div class="error"><%= notice %></div>
         <div id="temp_shift_js">
             <div><%= "テンプレート名："%> <input <%= "id=edit_templeat_name" %> type="text" <%= "value=#{@list.listname}" %> ></div>
             <% array = @list.shift.gsub(/<option>/, "").split("</option>") %>
@@ -37,10 +38,10 @@ function send_button(){
     var count = document.getElementById("temp_shift_js").childElementCount;
     for (i=0; i<count-2; i++){
         if(document.getElementById(`edit_child${i+1}`).value == ""){
-            break;
+            ;
+        } else{
+            allshiftname += `<option>${document.getElementById(`edit_child${i+1}`).value}</option>`
         };
-        console.log(document.getElementById(`edit_child${i+1}`).value);
-        allshiftname += `<option>${document.getElementById(`edit_child${i+1}`).value}</option>`
     };
     document.getElementById("shift_name_rails").value = allshiftname
 };
