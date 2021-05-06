@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :shifts
   has_many :lists
+
+  validates :nickname, presence: true
 end
